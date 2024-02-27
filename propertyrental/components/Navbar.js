@@ -1,11 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import logo from '@/assets/images/logo-white.png';
 import profileDefault from '@/assets/images/profile.png';
-import { FaGoogle } from 'react-icons/fa'
+import { FaGoogle } from 'react-icons/fa';
+
 
 
 
@@ -15,6 +17,8 @@ const Navbar = () => {
     const [isProfileMenuOpen, setisProfileMenuOpen] = useState(false);
 
 
+
+    const pathname = usePathname();
 
     return (
         <>
@@ -70,15 +74,15 @@ const Navbar = () => {
                                 <div className="flex space-x-2">
                                     <Link
                                         href="/"
-                                        className="text-white bg-black hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
+                                        className={`${pathname === '/' ? `bg-black` : ''} text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2`}
                                     >Home</Link>
                                     <Link
                                         href="/properties"
-                                        className="text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
+                                        className={`${pathname === '/properties' ? `bg-black` : ''} text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2`}
                                     >Properties</Link>
                                     <Link
                                         href="/properties/add"
-                                        className="text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
+                                        className={`${pathname === '/properties/add' ? `bg-black` : ''} text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2`}
                                     >Add Property</Link >
                                 </div>
                             </div>
@@ -195,15 +199,15 @@ const Navbar = () => {
                         <div className="space-y-1 px-2 pb-3 pt-2">
                             <Link
                                 href="/"
-                                className="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
+                                className={`${pathname === '/' ? `bg-black` : ''} text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2`}
                             >Home</Link>
                             <Link
                                 href="/properties"
-                                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                                className={`${pathname === '/properties' ? `bg-black` : ''} text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2`}
                             >Properties</Link>
                             <Link
                                 href="/properties/add"
-                                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                                className={`${pathname === '/properties/add' ? `bg-black` : ''} text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2`}
                             >Add Property</Link >
                             <button
                                 className="flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2 my-4"
