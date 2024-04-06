@@ -1,16 +1,19 @@
 import react from 'react';
-import Link from 'next/Link';
 import Hero from '@/components/Hero'
 import InfoBoxes from '@/components/InfoBoxes';
 import HomeProperties from '@/components/HomeProperties';
+import connectDB from '@/config/database';
 // export const metadata = {
 //     title: 'Homepage'
 // }
 
 
-const HomePage = () => {
+const HomePage = async () => {
+
 
     console.log(process.env.MONGODB_URI);
+
+    await connectDB();
 
 
 
