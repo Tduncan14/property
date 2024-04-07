@@ -1,9 +1,16 @@
-import { ConnectionStates } from "mongoose";
+import connectDB from "@/config/database";
+import Property from "@/models/Property";
 
+
+// GET /api/properties
 export const GET = async (request) => {
 
     try {
-        return new Response('Hello World', { status: 200 });
+        await connectDB();
+        const properties = await Property.find({});
+        return Response.json(properties)
+
+
 
     }
     catch (error) {

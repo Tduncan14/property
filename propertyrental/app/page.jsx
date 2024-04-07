@@ -8,12 +8,8 @@ import connectDB from '@/config/database';
 // }
 
 
-const HomePage = async () => {
+const HomePage = () => {
 
-
-    console.log(process.env.MONGODB_URI);
-
-    await connectDB();
 
 
 
