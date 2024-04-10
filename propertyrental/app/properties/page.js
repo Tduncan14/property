@@ -2,32 +2,37 @@
 // import Link from 'next/Link';
 // import properties from '@/properties.json';
 import PropertyCard from '@/components/PropertyCard';
+import { fetchProperties } from '@/utils/request';
 
 
 
-async function fetchProperties() {
-    try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}/properties`);
+// async function fetchProperties() {
+//     try {
+//         const res = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}/properties`);
 
 
-        if (!res.ok) {
-            throw new Error('failed to fetch data')
-        }
+//         if (!res.ok) {
+//             throw new Error('failed to fetch data')
+//         }
 
-        console.log(res)
-        return res.json()
+//         console.log(res)
+//         return res.json()
 
-    }
-    catch (error) {
-        console.log(error);
-    }
-}
+//     }
+//     catch (error) {
+//         console.log(error);
+//     }
+// }
 
 
 
 const PropertyPage = async () => {
 
     const properties = await fetchProperties();
+    // set the properties
+
+
+    properties.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 
 
     return (
