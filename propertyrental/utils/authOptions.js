@@ -28,10 +28,10 @@ export const authOptions = {
 
             const userExist = await User.findOne({ email: profile.email })
             // check if the user exist
-            if (!userExists) {
+            if (!userExist) {
                 //truncate user name if too long
 
-                const userName = profile.name.slice(0, 20);
+                const username = profile.name.slice(0, 20);
 
 
                 // if not, add user to the database
@@ -53,7 +53,10 @@ export const authOptions = {
 
     async session({ session }) {
         // Get user from the database
+        const user = await User.findOne({ email: session.user.email });
         // assign the user id to the session 
+        session.user.id = user._id.toString();
         // return session
+        return session
     }
 }

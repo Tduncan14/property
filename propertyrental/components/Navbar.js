@@ -12,12 +12,19 @@ const Navbar = () => {
 
     const { data: session } = useSession()
 
+    // getting the image
+
+    const profileImage = session?.user?.image
+
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
     // const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [providers, setProviders] = useState(false)
 
     const pathname = usePathname();
+
+
+    console.log(session, 'this is the session')
 
     useEffect(() => {
 
@@ -33,6 +40,7 @@ const Navbar = () => {
     }, [])
 
 
+    console.log(providers)
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen((prev) => !prev);
@@ -116,7 +124,7 @@ const Navbar = () => {
                                 >
                                     <span className="absolute -inset-1.5"></span>
                                     <span className="sr-only">Open user menu</span>
-                                    <Image className="h-8 w-8 rounded-full" src={profileDefault} alt="" />
+                                    <Image className="h-8 w-8 rounded-full" width={40} height={40} src={profileImage || profileDefault} alt="" />
                                 </button>
                                 {/* Profile dropdown */}
                                 {isProfileMenuOpen && (
@@ -129,7 +137,11 @@ const Navbar = () => {
                                     >
                                         <Link href="/profile" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1">Your Profile</Link>
                                         <Link href="/properties/save" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1">Saved Properties</Link>
-                                        <button className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1">Sign Out</button>
+                                        <button onClick={() => {
+                                            setIsProfileMenuOpen(false),
+                                                signOut()
+                                        }}
+                                            className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex="-1">Sign Out</button>
                                     </div>
                                 )}
                             </div>
