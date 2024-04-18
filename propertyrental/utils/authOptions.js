@@ -1,4 +1,6 @@
 import GoogleProvider from 'next-auth/providers/google'
+import connectDB from '@/config/database'
+import User from '@/models/User'
 
 
 
@@ -22,9 +24,28 @@ export const authOptions = {
 
         async signIn({ profile }) {
             // connect to the database
+            await connectDB();
+
+            const userExist = await User.findOne({ email: profile.email })
             // check if the user exist
-            // if not, add user to the database
+            if (!userExists) {
+                //truncate user name if too long
+
+                const userName = profile.name.slice(0, 20);
+
+
+                // if not, add user to the database
+
+                await User.create({
+                    email: profile.email,
+                    username,
+                    image: profile.picture
+                })
+            }
+
             // Return true to allow the sign in
+
+            return true
         }
     },
 
